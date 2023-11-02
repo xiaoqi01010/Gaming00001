@@ -50,8 +50,20 @@ function list_to_string(xs){
 //permutation(list(1,2,3));
 
 function generate_palindrome(x) {
-    const str = display(string_to_list(x),"string");
-    return map(y=>list_to_string(y),filter(x=>is_palindrome(display(list_to_string(x),"string")),display(permutation(str),"permutation")));
+    const str = string_to_list(x);
+    const tmp = map(y=>list_to_string(y),
+    filter(x=>is_palindrome(list_to_string(x)),
+    permutation(str)));
+    function helper(ls){
+        return is_null(ls)
+            ? null
+            : is_null(member(head(ls),tail(ls)))
+            ? pair(head(ls),helper(tail(ls)))
+            : helper(tail(ls))
+            ;
+    }
+    return helper(tmp);
 }
-generate_palindrome("jason");
+
+generate_palindrome("caabb");
 //self_reflect("hello");
