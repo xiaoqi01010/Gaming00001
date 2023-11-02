@@ -101,6 +101,7 @@ function sum_sequences(xs) {
 
 // TASK 3: TRAVERSE MATRIX DIAGONALLY
 
+
 function traverse_diagonally(M) {
     const len = array_length(M);
     
@@ -157,6 +158,8 @@ function traverse_diagonally(M) {
     }
     return accumulate((x,y)=>append(x,y),null,map(x=>traverse(x),final));
     }
+
+
 
 // TASK 4: FASTEST TO WIN
 
