@@ -119,3 +119,17 @@ function sum_sequences(xs) {
 }
 const e = sum_sequences(list(a,c,d));
 eval_stream(e,5);
+
+function traverse_diagonally(M) {
+    const len = array_length(M);
+    let res = null;
+    for(let i = 0; i<len-1; i = i+1){
+        for(let j = len-1; j>i; j = j+1){
+            let tmp = M[i][j];
+            display(tmp);
+            res = pair(tmp,res);
+        }
+    }
+    return res;
+}
+traverse_diagonally([[1,2,3],[4,5,6],[7,8,9]]);
