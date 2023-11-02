@@ -102,9 +102,61 @@ function sum_sequences(xs) {
 // TASK 3: TRAVERSE MATRIX DIAGONALLY
 
 function traverse_diagonally(M) {
-    // Your Solution Here
-}
+    const len = array_length(M);
+    
+    function submatrix(M,size){
+        let res = [];
+        for(let i = 0; i<size;i=i+1){
+            res[i]=[];
+            for(let j = 0; j<size;j= j+1){
+                res[i][j]=M[i][j];
+            }
+        }
+        return res;
+    }
+    function make_upper_submatrix(y){
+        return equal(y,len+1)
+            ? null
+            : pair(display(submatrix(M,y),"upper submatrix"),make_upper_submatrix(y+1))
+            ;
+        }
+    const upper = reverse(make_upper_submatrix(1));
+    function lower_submatrix(M,size){
+        let res = [];
+        for(let i = 0; i<size;i=i+1){
+            res[i]=[];
 
+            }
+            
+        for(let i = 0; i<size;i=i+1){
+            for(let j = 0; j<size;j= j+1){
+                res[size-1-i][size-1-j]=M[len-1-i][len-1-j];
+                }
+            }
+            
+
+        return res;
+        }
+    function make_lower_submatrix(y){
+        return equal(y,len)
+            ? null
+            : pair(display(lower_submatrix(M,y),"lower submatrix"),make_lower_submatrix(y+1))
+            ;
+        }
+    const lower = make_lower_submatrix(1);
+    const final = append(reverse(upper),reverse(lower));
+    display(final,"final");
+    function traverse(m){
+        const len = array_length(m);
+        let res = null;
+        for(let i = 0; i <len; i=i+1){
+
+                res = pair(m[len-1-i][i],res);
+        }
+        return len%2===1? reverse(res):res;
+    }
+    return accumulate((x,y)=>append(x,y),null,map(x=>traverse(x),final));
+    }
 
 // TASK 4: FASTEST TO WIN
 
