@@ -10,7 +10,7 @@ function permutation(xs){
     return is_null(xs)
         ? list(null)
         : accumulate((x,y)=>append(x,y)
-            ,null,map(term1=>map(term2=>pair(display(term1),term2),
+            ,null,map(term1=>map(term2=>pair(term1,term2),
             permutation(remove(term1,xs))),xs));
 }
 
@@ -122,13 +122,103 @@ eval_stream(e,5);
 
 function traverse_diagonally(M) {
     const len = array_length(M);
-    let res = null;
-    for(let i = 0; i<len; i = i+1){
-        let tmp = i;
-        for(let j = tmp; j<=0; j = j-1){
-            display(i,"i");
-            display(j,"j");
+    
+    function submatrix(M,size){
+        let res = [];
+        for(let i = 0; i<size;i=i+1){
+            res[i]=[];
+            for(let j = 0; j<size;j= j+1){
+                res[i][j]=M[i][j];
             }
         }
+        return res;
+    }
+    function make_upper_submatrix(y){
+        return equal(y,len+1)
+            ? null
+            : pair(display(submatrix(M,y),"upper submatrix"),make_upper_submatrix(y+1))
+            ;
+        }
+    const upper = reverse(make_upper_submatrix(1));
+    function lower_submatrix(M,size){
+        let res = [];
+        for(let i = 0; i<size;i=i+1){
+            res[i]=[];
+
+            }
+            
+        for(let i = 0; i<size;i=i+1){
+            for(let j = 0; j<size;j= j+1){
+                res[size-1-i][size-1-j]=M[len-1-i][len-1-j];
+                }
+            }
+            
+
+        return res;
+        }
+    function make_lower_submatrix(y){
+        return equal(y,len)
+            ? null
+            : pair(display(lower_submatrix(M,y),"lower submatrix"),make_lower_submatrix(y+1))
+            ;
+        }
+    const lower = make_lower_submatrix(1);
+    const final = append(reverse(upper),reverse(lower));
+    display(final,"final");
+    function traverse(m){
+        const len = array_length(m);
+        let res = null;
+        for(let i = 0; i <len; i=i+1){
+
+                res = pair(m[len-1-i][i],res);
+        }
+        return len%2===1? reverse(res):res;
+    }
+    return accumulate((x,y)=>append(x,y),null,map(x=>traverse(x),final));
+    }
+
+function diagonal(M){
+    const len = array_length(M);
+    function helper1(x,y){
+        return y<0
+        ?null
+        :pair(M[x][y],helper1(x+1,y-1));
+    }
+    let final = helper1(0,0);
+    for (let i = 1;i<len;i=i+1){
+        if(i%2!==0){
+            final = append(final,helper1(0,i));
+        }else{
+            final = append(final,reverse(helper1(0,i)));
+        }
+    }
+    function helper2(x,y){
+        return x>len-1
+        ?null
+        :pair(M[x][y],helper2(x+1,y-1));
+    }
+    for (let i = 1;i<len;i=i+1){
+        if(i%2!==0){
+            final = append(final,helper2(i,len-1));
+        }else{
+            final = append(final,reverse(helper2(i,len-1)));
+        }
+    }
+    return final; 
 }
-traverse_diagonally([[1,2,3],[4,5,6],[7,8,9]]);
+diagonal([
+    [1,2,3,4,5,6,7,8,9,10],
+    [11,12,13,14,15,16,17,18,19,20],
+    [21,22,23,24,25,26,27,28,29,30],
+    [31,32,33,34,35,36,37,38,39,40],
+    [41,42,43,44,45,46,47,48,49,50],
+    [51,52,53,54,55,56,57,58,59,60],
+    [61,62,63,64,65,66,67,68,69,70],
+    [71,72,73,74,75,76,77,78,79,80],
+    [81,82,83,84,85,86,87,88,89,90],
+    [91,92,93,94,95,96,97,98,99,100]
+    ]);
+
+function find_shortest_path(M) {
+    // Your Solution Here
+}
