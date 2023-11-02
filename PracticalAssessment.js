@@ -24,15 +24,20 @@ function is_palindrome(s) {
         : helper(tail(xs),tail(ys),equal(head(xs),head(ys))&&res)
         ;
     }
+    return helper(str_forward,str_backward,true);
 }
 
 // TASK 1C: GENERATE PALINDROMES
 
 function generate_palindrome(x) {
+    const str = string_to_list(x);
     function permutation(xs){
-        return accumulate((x,y)=>append(x,y),null,
-        map(term1=>map(term2=>pair(term1,term2),remove(xs,term2)),xs));
+        return is_null(xs)
+            ? list(null)
+            :accumulate((x,y)=>append(x,y),null,
+            map(term1=>map(term2=>pair(term1,term2),remove(xs,term2)),xs));
     }
+    return map(y=>list_to_string(y),filter(x=>is_palindrome(x),permutation(x)));
 }
 
 
