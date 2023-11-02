@@ -29,50 +29,74 @@ function is_palindrome(s) {
 
 // TASK 1C: GENERATE PALINDROMES
 
+
 function generate_palindrome(x) {
-    const str = string_to_list(x);
     function permutation(xs){
-        return is_null(xs)
-            ? list(null)
-            :accumulate((x,y)=>append(x,y),null,
-            map(term1=>map(term2=>pair(term1,term2),remove(xs,term2)),xs));
+    return is_null(xs)
+        ? list(null)
+        : accumulate((x,y)=>append(x,y)
+            ,null,map(term1=>map(term2=>pair(display(term1),term2),
+            permutation(remove(term1,xs))),xs));
+}
+    const str = string_to_list(x);
+    const tmp = map(y=>list_to_string(y),
+    filter(x=>is_palindrome(list_to_string(x)),
+    permutation(str)));
+    
+    
+    function helper(ls){
+    return is_null(ls)
+        ? null
+        : accumulate((x,y)=>is_null(filter(term=>term===x,y))? pair(x,y):y,null,ls);
     }
-    return map(y=>list_to_string(y),filter(x=>is_palindrome(x),permutation(x)));
+    return helper(tmp);
 }
 
 
 // TASK 2A: ARITHMETIC SEQUENCE
 
 function arithmetic_sequence(a, d) {
-    // Your Solution Here
+    return pair(a,()=>arithmetic_sequence(a+d,d));
 }
 
 // TASK 2B: GEOMETRIC SEQUENCE
 
 function geometric_sequence(a, r) {
-    // Your Solution Here
+    return pair(a,()=>geometric_sequence(a*r,r));
 }
 
 
 // TASK 2C: RECURRENCE RELATION
 
 function recurrence(t1, t2, f) {
-    // Your Solution Here
+    return pair(t1,()=>pair(t2,()=>recurrence(f(t1,t2),f(t2,f(t1,t2)),f)));
 }
 
 
 // TASK 2D: ZIP SEQUENCES
 
 function zip_sequences(xs) {
-    // Your Solution Here
+    return pair(head(head(xs)),()=>zip_sequences(append(tail(xs),list(stream_tail(head(xs))))));
 }
 
 
 // TASK 2E: SUM OF SEQUENCES
-
 function sum_sequences(xs) {
-    // Your Solution Here
+    function helper(xs){
+        return is_null(xs)
+            ? 0
+            : head(head(xs)) + helper(tail(xs));
+    }
+    function helper1(ys){
+        return is_null(ys)
+            ? null
+            : pair(stream_tail(head(ys)),helper1(tail(ys)));
+    }
+    return pair(
+        helper(xs)
+        ,()=>sum_sequences(helper1(xs)));
 }
+
 
 
 // TASK 3: TRAVERSE MATRIX DIAGONALLY
