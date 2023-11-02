@@ -1,4 +1,4 @@
-
+/*
 function self_reflect(s) {
     const tmp = string_to_list(s);
     let res = reverse(tmp);
@@ -217,8 +217,157 @@ diagonal([
     [71,72,73,74,75,76,77,78,79,80],
     [81,82,83,84,85,86,87,88,89,90],
     [91,92,93,94,95,96,97,98,99,100]
-    ]);
+    ]);*/
 
 function find_shortest_path(M) {
-    // Your Solution Here
+    //x is the number of rows 
+    function find_shortest_path_helper(M){
+    
+    function reduce_rows_by_one(m){
+        let len = array_length(m);
+        display(len);
+        if(len>1){
+        let modifiedM = [];
+        
+            for(let i = 0; i<len-1; i = i+1){
+                modifiedM[i]=M[i];
+            }
+            return modifiedM;
+        }
+        
+    }
+    
+    function taking_front_part_of_paths(paths,element){
+        return equal(element,head(display(paths,"path")))
+            ? null
+            : pair(head(paths),taking_front_part_of_paths(tail(paths),element));
+        } 
+    function paths_containing_cell(row,col,wish){
+        const paths = filter(x=>!is_null(member(M[row-1][col],x)),display(wish,"wish"));
+        display("here");
+        return map(x=>taking_front_part_of_paths(x,M[row-1][col]),paths);
+        }
+
+    function take_rest_of_row(M,i,row_length){
+        return equal(undefined,M[row_length-1][i])
+                            ? null
+                            : pair(M[row_length-1][i],take_rest_of_row(M,i+1,row_length));
+        }
+    
+    
+    if(array_length(M)===1){
+        let res = null;
+        const len = array_length(M[0]);
+        for(let i = 0; i<len; i = i+1){
+            res = pair(M[0][i],res);
+            }
+        display(res,"res in if block");
+        return pair(reverse(res),null);
+    }else{
+        const row_length = array_length(M);
+        const wish = find_shortest_path_helper(display(reduce_rows_by_one(M)));
+        
+        const column_length = array_length(M[0]);
+        
+        let result = map(x=>pair(M[row_length-1][column_length-1],x),wish);
+        
+        for(let i= 0; i<column_length-1; i= i+1){
+            
+            let current = paths_containing_cell(row_length-1,i,wish);
+            display("else block");
+            let secondpart = reverse(take_rest_of_row(M,i,row_length));
+            display(secondpart,"secondpart");
+            display(current,"current");
+            current = map(x=>append(x,secondpart),current);
+            result = append(current,result);
+        }
+        
+        return result;
+        }
+    }
+    
+    function sum(xs){
+        return is_null(xs)
+            ? 0
+            : head(xs) + sum(tail(xs));
+    }
+    const finalpaths = find_shortest_path_helper(M);
+    const list_of_paths_with_sums = map(x=>pair(x,sum(x)),finalpaths);
+    display(list_of_paths_with_sums,"list_of_paths_with_sums");
+    return display(head(accumulate((x,y)=>tail(x)<tail(y)? x: y, head(list_of_paths_with_sums),list_of_paths_with_sums)),"result");
 }
+
+
+//function test4() {
+    
+    function util1() {
+        const rooms = [[1, 2, 3, 4], 
+					   [5, 0, 7, 7], 
+					   [9, 0, 1, 0], 
+					   [5, 1, 7, 0], 
+					   [6, 1, 1, 1]];
+		const path = find_shortest_path(rooms);
+		if (is_number(path) && path === 5) {
+		    display("TEST 4 - 1: PASS [Public Test Case]");
+		} else {
+		    display("TEST 4 - 1: FAIL [Public Test Case]");
+		}
+    }
+    util1();
+/* 
+    function util2() {
+        const rooms = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
+		const path = find_shortest_path(rooms);
+		if (is_number(path) && path === 5) {
+		    display("TEST 4 - 2: PASS [Same Rooms Time]");
+		} else {
+		    display("TEST 4 - 2: FAIL [Same Rooms Time]");
+		}
+    }
+    
+    function util3() {
+        const rooms = [[0, 0, 0, 0], [0, 0, 0, 0]];
+		const path = find_shortest_path(rooms);
+		if (is_number(path) && path === 0) {
+		    display("TEST 4 - 3: PASS [Zero Matrix]");
+		} else {
+		    display("TEST 4 - 3: FAIL [Zero Matrix]");
+		}
+    }
+    
+    function util4() {
+        const rooms = [[1]];
+		const path = find_shortest_path(rooms);
+		if (is_number(path) && path === 1) {
+		    display("TEST 4 - 4: PASS [Single Element Array]");
+		} else {
+		    display("TEST 4 - 4: FAIL [Single Element Array]");
+		}
+    }
+    
+    util1();
+    util2();
+    util3();
+    util4();
+}
+
+function test1() {
+    test1A();
+    test1B();
+    test1C();
+}
+
+function test2() {
+    test2A();
+    test2B();
+    test2C();
+    test2D();
+    test2E();
+}
+
+function test() {
+    test1();
+    test2();
+    test3();
+    test4();
+}*/
