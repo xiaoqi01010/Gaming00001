@@ -302,6 +302,26 @@ function find_shortest_path(M) {
 }
 
 
+function shortest_path(M){
+    const len = array_length(M);
+    const col_length = array_length(M[0]);
+    let min = Infinity;
+
+    function calc_cost(i,j,M,sum){
+        if(i===len-1 && j===col_length-1){
+            if(sum<min){
+                display(M[i][j],"last loop");
+                min = sum;
+            }
+        }else if(i<len && j<col_length){
+            display(M[i][j]);
+            calc_cost(i+1,j,M,sum+M[i][j]);
+            calc_cost(i,j+1,M,sum+M[i][j]);
+        }
+    }
+    calc_cost(0,0,M,0);
+    return min+M[len-1][col_length-1];
+}
 
     
     function util1() {
@@ -318,3 +338,5 @@ function find_shortest_path(M) {
 		}
     }
     util1();
+    
+    
