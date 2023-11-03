@@ -1,4 +1,4 @@
-/*
+
 function self_reflect(s) {
     const tmp = string_to_list(s);
     let res = reverse(tmp);
@@ -217,8 +217,11 @@ diagonal([
     [71,72,73,74,75,76,77,78,79,80],
     [81,82,83,84,85,86,87,88,89,90],
     [91,92,93,94,95,96,97,98,99,100]
-    ]);*/
+    ]);
 
+
+//Note that the code below only works for matrix with distinct elements.
+// This is because of a bug in the logic, assuming that each element appears only once in each row. 
 function find_shortest_path(M) {
     //x is the number of rows 
     function find_shortest_path_helper(M){
@@ -239,9 +242,10 @@ function find_shortest_path(M) {
     
     function taking_front_part_of_paths(paths,element){
         return equal(element,head(display(paths,"path")))
-            ? null
+            ? pair(element,null)
             : pair(head(paths),taking_front_part_of_paths(tail(paths),element));
         } 
+        
     function paths_containing_cell(row,col,wish){
         const paths = filter(x=>!is_null(member(M[row-1][col],x)),display(wish,"wish"));
         display("here");
@@ -269,13 +273,13 @@ function find_shortest_path(M) {
         
         const column_length = array_length(M[0]);
         
-        let result = map(x=>pair(M[row_length-1][column_length-1],x),wish);
+        let result = map(x=>append(display(x,"test"),list(M[row_length-1][column_length-1])),wish);
         
         for(let i= 0; i<column_length-1; i= i+1){
             
             let current = paths_containing_cell(row_length-1,i,wish);
             display("else block");
-            let secondpart = reverse(take_rest_of_row(M,i,row_length));
+            let secondpart = take_rest_of_row(M,i,row_length);
             display(secondpart,"secondpart");
             display(current,"current");
             current = map(x=>append(x,secondpart),current);
@@ -294,18 +298,18 @@ function find_shortest_path(M) {
     const finalpaths = find_shortest_path_helper(M);
     const list_of_paths_with_sums = map(x=>pair(x,sum(x)),finalpaths);
     display(list_of_paths_with_sums,"list_of_paths_with_sums");
-    return display(head(accumulate((x,y)=>tail(x)<tail(y)? x: y, head(list_of_paths_with_sums),list_of_paths_with_sums)),"result");
+    return display(tail(accumulate((x,y)=>tail(x)<tail(y)? x: y, head(list_of_paths_with_sums),list_of_paths_with_sums)),"result");
 }
 
 
-//function test4() {
+
     
     function util1() {
         const rooms = [[1, 2, 3, 4], 
-					   [5, 0, 7, 7], 
-					   [9, 0, 1, 0], 
-					   [5, 1, 7, 0], 
-					   [6, 1, 1, 1]];
+					   [5, 6, 7, 8], 
+					   [9, 10, 11, 12], 
+					   [13, 14, 15, 16], 
+					   [17, 18, 19, 20]];
 		const path = find_shortest_path(rooms);
 		if (is_number(path) && path === 5) {
 		    display("TEST 4 - 1: PASS [Public Test Case]");
@@ -314,60 +318,3 @@ function find_shortest_path(M) {
 		}
     }
     util1();
-/* 
-    function util2() {
-        const rooms = [[1, 1, 1], [1, 1, 1], [1, 1, 1]];
-		const path = find_shortest_path(rooms);
-		if (is_number(path) && path === 5) {
-		    display("TEST 4 - 2: PASS [Same Rooms Time]");
-		} else {
-		    display("TEST 4 - 2: FAIL [Same Rooms Time]");
-		}
-    }
-    
-    function util3() {
-        const rooms = [[0, 0, 0, 0], [0, 0, 0, 0]];
-		const path = find_shortest_path(rooms);
-		if (is_number(path) && path === 0) {
-		    display("TEST 4 - 3: PASS [Zero Matrix]");
-		} else {
-		    display("TEST 4 - 3: FAIL [Zero Matrix]");
-		}
-    }
-    
-    function util4() {
-        const rooms = [[1]];
-		const path = find_shortest_path(rooms);
-		if (is_number(path) && path === 1) {
-		    display("TEST 4 - 4: PASS [Single Element Array]");
-		} else {
-		    display("TEST 4 - 4: FAIL [Single Element Array]");
-		}
-    }
-    
-    util1();
-    util2();
-    util3();
-    util4();
-}
-
-function test1() {
-    test1A();
-    test1B();
-    test1C();
-}
-
-function test2() {
-    test2A();
-    test2B();
-    test2C();
-    test2D();
-    test2E();
-}
-
-function test() {
-    test1();
-    test2();
-    test3();
-    test4();
-}*/
