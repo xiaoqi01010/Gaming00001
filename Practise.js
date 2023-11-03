@@ -1,7 +1,8 @@
 function diagonal(M){
     const row_length = array_length(M);
-    let res = null;
+    let res = list(null);
     function flip_even(M){
+        display("here");
         function swap(r1,c1,r2,c2){
             const tmp = M[r1][c1];
             M[r1][c1] = M[r2][c2];
@@ -9,8 +10,6 @@ function diagonal(M){
         }
         for(let i = 0; i<row_length; i = i+1){
             for(let j =i; j<row_length; j = j+1){
-                display(i);
-                display(j);
                 if((i+j)%2===1){
                 swap(i,j,j,i);
                 }
@@ -19,19 +18,18 @@ function diagonal(M){
     }
     flip_even(M);
     function traverse(M,i,j){
-        let res = null;
-        while(i<row_length && j>=0){
+        while(j<row_length && i>=0){
         if(M[i][j]===undefined){
-            traverse(M,i+1,j-1);
+            traverse(M,i-1,j+1);
         }else{
             res = append(res,list(M[i][j]));
-            traverse(M,i+1,j-1);
+            traverse(M,i-1,j+1);
         }
         }
         return res; 
     }
     for(let i = 0; i<row_length; i = i+1){
-        res = append(traverse(M,i,row_length-1),res);
+        traverse(M,i,0);
     }
     return res;
 }
