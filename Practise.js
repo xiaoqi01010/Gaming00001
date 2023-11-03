@@ -17,18 +17,18 @@ function diagonal(M){
         }
     }
     flip_even(M);
+    //if you use while(j<length ...)as condition it will run into an infinite loop 
     function traverse(M,i,j){
-        while(j<row_length && i>=0){
-        if(M[i][j]===undefined){
+        if(j<row_length && i>=0){
+        if(M[i]===undefined || M[i][j]===undefined){
             traverse(M,i-1,j+1);
         }else{
             res = append(res,list(M[i][j]));
             traverse(M,i-1,j+1);
-        }
-        }
-        return res; 
+                }
+            }
     }
-    for(let i = 0; i<row_length; i = i+1){
+    for(let i = 0; i<2*row_length-1; i = i+1){
         traverse(M,i,0);
     }
     return res;
