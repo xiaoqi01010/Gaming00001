@@ -76,7 +76,9 @@ function recurrence(t1, t2, f) {
 // TASK 2D: ZIP SEQUENCES
 
 function zip_sequences(xs) {
-    return pair(head(head(xs)),()=>zip_sequences(append(tail(xs),list(stream_tail(head(xs))))));
+    return is_null(xs)
+        ? null
+        :pair(head(head(xs)),()=>zip_sequences(append(tail(xs),list(stream_tail(head(xs))))));
 }
 
 
@@ -92,7 +94,9 @@ function sum_sequences(xs) {
             ? null
             : pair(stream_tail(head(ys)),helper1(tail(ys)));
     }
-    return pair(
+    return is_null(xs)
+        ? null
+        : pair(
         helper(xs)
         ,()=>sum_sequences(helper1(xs)));
 }
@@ -103,8 +107,9 @@ function sum_sequences(xs) {
 
 
 function traverse_diagonally(M) {
+    display(M[0]);
+    if(display(M[0]===undefined)){return null;}
     const len = array_length(M);
-    
     function submatrix(M,size){
         let res = [];
         for(let i = 0; i<size;i=i+1){
@@ -121,7 +126,7 @@ function traverse_diagonally(M) {
             : pair(display(submatrix(M,y),"upper submatrix"),make_upper_submatrix(y+1))
             ;
         }
-    const upper = reverse(make_upper_submatrix(1));
+    const upper = equal(M,[])? null :reverse(make_upper_submatrix(1));
     function lower_submatrix(M,size){
         let res = [];
         for(let i = 0; i<size;i=i+1){
@@ -144,7 +149,7 @@ function traverse_diagonally(M) {
             : pair(display(lower_submatrix(M,y),"lower submatrix"),make_lower_submatrix(y+1))
             ;
         }
-    const lower = make_lower_submatrix(1);
+    const lower =make_lower_submatrix(1);
     const final = append(reverse(upper),reverse(lower));
     display(final,"final");
     function traverse(m){
@@ -163,8 +168,25 @@ function traverse_diagonally(M) {
 
 // TASK 4: FASTEST TO WIN
 
-function find_shortest_path(M) {
-    // Your Solution Here
+function find_shortest_path(M){
+    const len = array_length(M);
+    const col_length = array_length(M[0]);
+    let min = Infinity;
+
+    function calc_cost(i,j,M,sum){
+        if(i===len-1 && j===col_length-1){
+            if(sum<min){
+                display(M[i][j],"last loop");
+                min = sum;
+            }
+        }else if(i<len && j<col_length){
+            display(M[i][j]);
+            calc_cost(i+1,j,M,sum+M[i][j]);
+            calc_cost(i,j+1,M,sum+M[i][j]);
+        }
+    }
+    calc_cost(0,0,M,0);
+    return min+M[len-1][col_length-1];
 }
 
 
