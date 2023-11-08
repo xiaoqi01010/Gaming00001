@@ -278,6 +278,7 @@ function selection_sort(A){
 display(selection_sort([1,4,3,2,5,6,7,3]),"Notice this is the same array returned ---> ");
 
 //Merge sort algorithm
+//This way of implementation can be tedious and space consuming so a much better alternative can be used. 
 function merge_sort(A){
     if(A[0]===undefined){
         display("here now");
@@ -333,4 +334,4 @@ function merge_sort(A){
         return res;
     }
 
-merge_sort([1,3,2,3,4,5,6,2123,2,3,4]);
+display(merge_sort([1,3,2,3,4,5,6,2123,2,3,4]),"Notice how this way of implementing is extremely space consuming --> ");
