@@ -66,6 +66,42 @@ display(AA,"Notice how AA doesnt change-->");
 
 //Notice how the above is not destructive, ie. original structure is not changed! 
 // But what if we want to change the data structure directly? 
+function dest_transpose(A){
+    if(A[0]===undefined){ //base case of []
+        return A;
+    }
+    const row_len = array_length(A);
+    const col_len = array_length(A[0]);
+    for(let i = 0; i<row_len; i = i+1){
+        for(let j = i; j<col_len; j = j+1){
+            let temp = A[i][j];
+            A[i][j] = A[j][i];   
+            A[j][i] = temp;
+        }
+    }
+    return A;
+}
+
+display(dest_transpose(AA),"Notice now that AA changed -->");
+
+function destr_rotate_90_deg(A){
+    transpose(A);
+    if(A[0]===undefined){ //base case of []
+        return A;
+    }
+    const row_len = array_length(A);
+    const col_len = array_length(A[0]);
+    for(let i = 0; i<row_len; i = i+1){
+        for(let j = 0; j<math_floor(col_len/2); j = j+1){
+            //swap 
+            let temp = A[i][j];
+            A[i][j] = A[i][col_len-1-j];
+            A[i][col_len-1-j] = temp;
+        }
+    }
+    return A;
+}
+display(destr_rotate_90_deg(AA),"Notice now that AA changed -->");
 
 function search_cond(A,cond){
     const len = array_length(A);
