@@ -20,3 +20,26 @@ function permutations(xs) {
         );
     }
 }
+
+function combinations(xs, r) {
+    if ((r !== 0 && is_null(xs)) || r < 0) {
+        return null;
+    } else if (r === 0) {
+        return list(null);
+    } else {
+        const no_choose = combinations(tail(xs), r);
+        const yes_choose = combinations(tail(xs), r - 1);
+        const yes_item = map((x) => pair(head(xs), x), yes_choose);
+        return append(no_choose, yes_item);
+    }
+}
+
+function list_to_array(L) {
+    const A = [];
+    let i = 0;
+    for (let p = L; !is_null(p); p = tail(p)) {
+        A[i] = head(p);
+        i = i + 1;
+    }
+    return A;
+}
