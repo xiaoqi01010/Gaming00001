@@ -242,7 +242,22 @@ function insert_sort(A){
     return newArr;
 }
 display(insert_sort([1,4,3,2]),"Notice this is a new array returned ---> ");
-
+//The other insertion sort method
+function insert_and_sort(A){
+    const len = array_length(A);
+    for(let i =0;  i<len; i = i+1){
+        for(let j = i;j<len-1; j = j+1){
+            if(A[j]>A[j+1]){
+                let temp = A[j];
+                A[j+1] = A[j];
+                A[j] = temp;
+            }
+        }
+    }
+    return A;
+}
+display(insert_sort([1,4,3,2]),"Notice this is a destructive method ---> ");
+//selection sort 
 function find_min_pos(low,high,A,min){
     return low === high
         ? min
