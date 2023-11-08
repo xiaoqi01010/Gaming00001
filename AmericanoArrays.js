@@ -242,21 +242,21 @@ function insert_sort(A){
     return newArr;
 }
 display(insert_sort([1,4,3,2]),"Notice this is a new array returned ---> ");
-//The other insertion sort method
+//The other insertion sort method. This is similar to bubble sort except that the idea of insertion is to insert the a certain element in the array to the correct position in the back of the array. 
 function insert_and_sort(A){
     const len = array_length(A);
     for(let i =0;  i<len; i = i+1){
-        for(let j = i;j<len-1; j = j+1){
-            if(A[j]>A[j+1]){
+        for(let j = i;j<len; j = j+1){
+            if(A[i]>A[j]){
                 let temp = A[j];
-                A[j+1] = A[j];
-                A[j] = temp;
+                A[j] = A[i];
+                A[i] = temp;
             }
         }
     }
     return A;
 }
-display(insert_sort([1,4,3,2]),"Notice this is a destructive method ---> ");
+display(insert_and_sort([1,4,3,2,2,3,4,51,2,3,1]),"Notice this is a destructive method ---> ");
 //selection sort 
 function find_min_pos(low,high,A,min){
     return low === high
