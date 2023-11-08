@@ -335,3 +335,18 @@ function merge_sort(A){
     }
 
 display(merge_sort([1,3,2,3,4,5,6,2123,2,3,4]),"Notice how this way of implementing is extremely space consuming --> ");
+//less space coonsuming method
+function better_merge_sort(A){
+    const len = array_length(A);
+    if(A[0]===undefined){
+        return A;
+    }else if(array_length(A)===1){
+        return A;
+    }else{
+        return merge_sort_helper(A,0,len-1);
+    }
+}
+
+function merge_helper(A,low,high){
+    
+}
