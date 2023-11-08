@@ -1,4 +1,15 @@
 //Basic operation on arrays 
+function append_array(A, v) {
+    A[array_length(A)] = v;
+}
+
+function append_array_copy(A, B) {
+    A = copy_array(A);
+    for (let i = 0; i < array_length(B); i = i + 1) {
+        append(A, B[i]);
+    }
+    return A;
+}
 //Notice how this is basically the mathematical formula of dot product where you have 3 pointers. 
 // pointer 1 responsible for moving along the rows of A, pointer 2 for moving along the columns and pointer 3 for moving along the col of B. 
 function dot_product(A,B){
