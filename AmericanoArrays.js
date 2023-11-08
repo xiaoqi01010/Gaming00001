@@ -276,3 +276,49 @@ function selection_sort(A){
     return A;
 }
 display(selection_sort([1,4,3,2,5,6,7,3]),"Notice this is the same array returned ---> ");
+
+//Merge sort aalgorithm
+function merge_sort(A){
+    if(A[0]===undefined){
+        return A; //again,always tackle base case first  
+    }else{
+        const len = array_length(A);
+        const low = 0;
+        const high = len - 1;
+        const mid = math_floor((low+high)/2);
+        const front = split(A,low,mid);
+        const back = split(A,mid+1,high);
+        return merge(merge_sort(front),merge_sort(back));
+    }
+}
+
+    function split(A,low,high){
+        const len = array_length(A);
+        let res = [];
+        for(let i = low; i<high; i = i+1){
+            res[i-low] = A[i];
+        }
+    }
+    
+    function merge(A,B){
+        let res = [];
+        let i = 0;
+        while(A[i]!==undefined && B[i]!==undefined){
+            if(A[i]>B[i]){
+                res[i] = B[i];
+            }else{
+                res[i]= A[i];
+            }
+            i =i+1;
+        }
+        while(A[i]!==undefined){
+            res[i] = A[i];
+            i = i+1;
+        }
+        while(B[i]!==undefined){
+            res[i] = B[i];
+            i = i+1;
+        }
+        return res;
+    }
+merge_sort([1,3,2]);
