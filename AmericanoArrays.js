@@ -389,6 +389,28 @@ display(better_merge_sort([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]),
 "A better merge_sort. Notice how only 1 more array is created as compared to multiple arrays in the previous method--->");
 
 /*******Destructive Merge_sort for list adapted to arrays*******************/
+function list_to_array(xs){
+    let res = [];
+    let pointer = 0;
+    while(!is_null(xs)){
+        res[pointer] = head(xs);
+        xs = tail(xs);
+        pointer = pointer +1;
+    }
+    return res;
+}
+
+function array_to_list(A){
+    let i = 0;
+    let res = null;
+    while(!equal(A[i],undefined)){
+        res = pair(A[i],res);
+        i = i+1;
+    }
+    return reverse(res);
+}
+
+
 
 function d_split_list(xs) {
     const result= pair(xs,null);
@@ -436,6 +458,11 @@ function d_merge_sort(xs){
     
 }
 
+
+
+function d_merge_sort_array(A){
+    return list_to_array(d_merge_sort(array_to_list(A)));
+}
 // TEST:
-const my_list = list(7, 2, 4, 6, 9, 1, 5, 8, 3, 6);
-d_merge_sort(my_list);
+
+display(d_merge_sort_array([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]);
