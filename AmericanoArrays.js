@@ -243,6 +243,7 @@ function insert_sort(A){
 }
 display(insert_sort([1,4,3,2]),"Notice this is a new array returned ---> ");
 //The other insertion sort method. This is similar to bubble sort except that the idea of insertion is to insert the a certain element in the array to the correct position in the back of the array. 
+//Thus there are more swaps in insertion sort compared to bubble sort. Bubble sort is merely swapping of 2 elements next to each other 
 function insert_and_sort(A){
     const len = array_length(A);
     for(let i =0;  i<len; i = i+1){
