@@ -277,10 +277,13 @@ function selection_sort(A){
 }
 display(selection_sort([1,4,3,2,5,6,7,3]),"Notice this is the same array returned ---> ");
 
-//Merge sort aalgorithm
+//Merge sort algorithm
 function merge_sort(A){
     if(A[0]===undefined){
+        display("here now");
         return A; //again,always tackle base case first  
+    }else if(array_length(A)===1){
+        return A;
     }else{
         const len = array_length(A);
         const low = 0;
@@ -293,32 +296,41 @@ function merge_sort(A){
 }
 
     function split(A,low,high){
-        const len = array_length(A);
         let res = [];
-        for(let i = low; i<high; i = i+1){
+        for(let i = low; i<=high; i = i+1){
             res[i-low] = A[i];
         }
+        return res;
     }
+    
     
     function merge(A,B){
         let res = [];
         let i = 0;
-        while(A[i]!==undefined && B[i]!==undefined){
-            if(A[i]>B[i]){
-                res[i] = B[i];
+        let pointerA = 0;
+        let pointerB = 0;
+        while(A[pointerA]!==undefined && B[pointerB]!==undefined){
+            if(A[pointerA]>B[pointerB]){
+                res[i] = B[pointerB];
+                pointerB = pointerB + 1;
             }else{
-                res[i]= A[i];
+                res[i]= A[pointerA];
+                pointerA = pointerA + 1;
             }
             i =i+1;
         }
-        while(A[i]!==undefined){
-            res[i] = A[i];
+        while(A[pointerA]!==undefined){
+            res[i] = A[pointerA];
             i = i+1;
+            pointerA = pointerA + 1;
         }
-        while(B[i]!==undefined){
-            res[i] = B[i];
+        while(B[pointerB]!==undefined){
+            res[i] = B[pointerB];
             i = i+1;
+            pointerB = pointerB + 1;
         }
+        
         return res;
     }
-merge_sort([1,3,2]);
+
+merge_sort([1,3,2,3,4,5,6,2123,2,3,4]);
