@@ -10,6 +10,27 @@ function append_array_copy(A, B) {
     }
     return A;
 }
+function combine_array(A,B){
+    let lenA = array_length(A);
+    let lenB = array_length(B);
+    
+    for(let i = lenA; i<lenA+lenB; i=i+1){
+        A[i] = B[i-lenA];
+    }
+    return A;
+}
+
+function in_array(array,element){
+    let true_or_false = false;
+    const len = array_length(array);
+    for(let i = 0; i<len; i=i+1){
+        if(array[i] === element ){
+            true_or_false = true;
+        }
+    }
+    return true_or_false;
+}
+
 //Notice how this is basically the mathematical formula of dot product where you have 3 pointers. 
 // pointer 1 responsible for moving along the rows of A, pointer 2 for moving along the columns and pointer 3 for moving along the col of B. 
 function dot_product(A,B){
