@@ -3,6 +3,7 @@ function append_array(A, v) {
     A[array_length(A)] = v;
 }
 
+
 function append_array_copy(A, B) {
     A = copy_array(A);
     for (let i = 0; i < array_length(B); i = i + 1) {
