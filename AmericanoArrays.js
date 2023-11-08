@@ -338,15 +338,51 @@ display(merge_sort([1,3,2,3,4,5,6,2123,2,3,4]),"Notice how this way of implement
 //less space coonsuming method
 function better_merge_sort(A){
     const len = array_length(A);
-    if(A[0]===undefined){
-        return A;
-    }else if(array_length(A)===1){
-        return A;
-    }else{
-        return merge_sort_helper(A,0,len-1);
+    merge_helper(A,0,len-1);
+    return A;
+}
+
+
+function merge_helper(A,low,high){
+    if(low<high){
+        const mid = math_floor((low+high)/2);
+        merge_helper(A,low,mid);
+        merge_helper(A, mid+1,high);
+        better_merge(A,low,mid,high);
     }
 }
 
-function merge_helper(A,low,high){
-    
+function better_merge(A,low,mid,high){
+    let tmp = [];
+    let i = 0;
+    let left = low;
+    let right = mid+1; 
+    while(left<=mid && right<=high){
+        if(A[left]<A[right]){
+            tmp[i] = A[left];
+            left = left +1;
+        }else{
+            tmp[i] = A[right];
+            right = right + 1;
+            
+        }
+        i = i+1;
+    }
+    while(left<= mid){
+        tmp[i] = A[left];
+        left = left +1;
+        i = i +1;
+    }
+    while(right<= high){
+        tmp[i] = A[right];
+        right = right +1;
+        i = i +1;
+    }
+    for(let k = 0; k<high -low+1; k = k+1){
+        A[low+k] = tmp[k]; 
+    }
+   
 }
+display(better_merge_sort([1,3,2,3,4,5,6,2123,2,3,4]),"A better merge_sort. Notice how only 1 more array is created as compared to multiple arrays in the previous method--->");
+
+
