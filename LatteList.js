@@ -43,3 +43,29 @@ function list_to_array(L) {
     }
     return A;
 }
+
+function list_to_array_recursive(L) {
+    if (!is_list(L)) {
+        return L;
+    } else {
+        const A = [];
+        let i = 0;
+        for (let p = L; !is_null(p); p = tail(p)) {
+            A[i] = list_to_array_recursive(head(p));
+            i = i + 1;
+        }
+        return A;
+    }
+}
+
+function flatten_list(lst){
+    return accumulate((x,y)=>append(x,y),null,lst);
+}
+
+function remove_duplicates(lst) {
+    return is_null(lst)
+    ? null
+    : pair(head(lst),
+    remove_duplicates(
+    filter(x => !equal(x, head(lst)), tail(lst))));
+}
