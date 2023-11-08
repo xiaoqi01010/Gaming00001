@@ -1,3 +1,72 @@
+//Basic operation on arrays 
+//Notice how this is basically the mathematical formula of dot product where you have 3 pointers. 
+// pointer 1 responsible for moving along the rows of A, pointer 2 for moving along the columns and pointer 3 for moving along the col of B. 
+function dot_product(A,B){
+    let res = [];
+    let row_len = array_length(A);
+    let col_len = array_length(B);
+    for(let i = 0; i<row_len; i = i+1){
+        res[i]= [];
+        for(let j = 0; j<row_len; j = j+1){
+            res[i][j]=0;
+            for(let k = 0; k< col_len; k= k+1){
+                res[i][j] = A[i][k]*B[k][j]+res[i][j];
+            }
+        }
+    }
+    return res;
+}
+const C =  [[1,2,3],
+            [4,5,6],
+            [7,8,9],
+            [10,11,12]];
+const D = [[1,2,3,4],
+            [5,6,7,8],
+            [9,10,11,12]];
+            
+dot_product(C,D);
+
+function transpose(A){
+    if(A[0]===undefined){ //base case of []
+        return [];
+    }
+    let res = [];
+    const row_len = array_length(A);
+    const col_len = array_length(A[0]);
+    for(let i = 0; i<row_len ; i = i+1){
+        res[i] = []; //remember to define the row here 
+        for(let j = 0; j<col_len ; j = j+1){
+            res[i][j] = A[j][i];   
+        }
+    }
+    return res;
+}
+const AA = [[1,2,3],[4,5,6],[7,8,9]];
+display(transpose(AA));
+
+function rotate_90_deg(A){
+    let res = transpose(A);
+    if(A[0]===undefined){ //base case of []
+        return [];
+    }
+    const row_len = array_length(A);
+    const col_len = array_length(A[0]);
+    for(let i = 0; i<row_len; i = i+1){
+        for(let j = 0; j<math_floor(col_len/2); j = j+1){
+            //swap 
+            let temp = res[i][j];
+            res[i][j] = res[i][col_len-1-j];
+            res[i][col_len-1-j] = temp;
+        }
+    }
+    return res;
+}
+display(rotate_90_deg(AA));
+display(AA,"Notice how AA doesnt change-->");
+
+//Notice how the above is not destructive, ie. original structure is not changed! 
+// But what if we want to change the data structure directly? 
+
 function search_cond(A,cond){
     const len = array_length(A);
     let i = 0;
