@@ -385,4 +385,5 @@ function better_merge(A,low,mid,high){
 }
 display(better_merge_sort([1,3,2,3,4,5,6,2123,2,3,4]),"A better merge_sort. Notice how only 1 more array is created as compared to multiple arrays in the previous method--->");
 
+/*******Destructive Merge_sort*******************/
 
