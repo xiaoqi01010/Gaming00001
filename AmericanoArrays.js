@@ -1,8 +1,12 @@
 //Basic operation on arrays 
 function append_array(A, v) {
     A[array_length(A)] = v;
+    return A;
 }
 
+
+
+display(append_array([1,2,3],[1,2]));
 
 function append_array_copy(A, B) {
     A = copy_array(A);
@@ -563,3 +567,4 @@ function d_merge_sort_array(A){
 // TEST:
 
 display(d_merge_sort_array([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]),"Notice how one data type can be easily converted to another so that maniplationc can occur.Overhere, it was obvious that the code is much shorter if you can use list instead of array --->");
+
