@@ -50,6 +50,32 @@ function copy_array(A) {
     return B;
 }
 
+function accumulate_array(op, init, A) {
+    let k = 0;
+    let result = op(init, A[k]);
+    let len = array_length(A);
+    while (k< len-1){
+        result = op(result, A[k+1]);
+        k = k+1;
+    }
+    return result;
+}
+
+function filter_array(pred, A) {
+    let k = 0;
+    let new_k = 0;
+    let new_array = [];
+    let len = array_length(A);
+    
+    while (k< len){
+        if (pred(A[k])){
+            new_array[new_k] = A[k];
+            new_k = new_k+1;
+        }
+        k = k+1;
+    }
+    return new_array;
+}
 //Notice how this is basically the mathematical formula of dot product where you have 3 pointers. 
 // pointer 1 responsible for moving along the rows of A, pointer 2 for moving along the columns and pointer 3 for moving along the col of B. 
 function dot_product(A,B){
