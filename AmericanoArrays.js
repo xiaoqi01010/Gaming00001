@@ -465,4 +465,4 @@ function d_merge_sort_array(A){
 }
 // TEST:
 
-display(d_merge_sort_array([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]);
+display(d_merge_sort_array([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]),"Notice how one data type can be easily converted to another so that maniplationc can occur.Overhere, it was obvious that the code is much shorter if you can use list instead of array --->");
