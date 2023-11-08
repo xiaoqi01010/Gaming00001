@@ -100,6 +100,8 @@ function flatten_array(array){
     }
     return helper(array, []);
 }
+
+
 //Notice how this is basically the mathematical formula of dot product where you have 3 pointers. 
 // pointer 1 responsible for moving along the rows of A, pointer 2 for moving along the columns and pointer 3 for moving along the col of B. 
 function dot_product(A,B){
@@ -570,6 +572,7 @@ display(d_merge_sort_array([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]),"Notice how one data 
 
 /*****************************Quicksort algorithm***********************************/
 function partition(A,p){
+    display(A,"partition");
     const a = [];
     const b = [];
     for(let i = 0; i<array_length(A);i = i+1){
@@ -579,7 +582,6 @@ function partition(A,p){
         }else{
             append_array(b,x);
         }
-        append_array(a,p);
     }
     return pair(a,b);
 }
@@ -587,14 +589,25 @@ function partition(A,p){
 function quicksort(A){
     if(array_length(A)<2){
         return A;
+    }else if(array_length(A)===2){
+        if(A[0]>A[1]){
+            const temp = A[0];
+            A[0] = A[1];
+            A[1] = temp;
+        }
+        return A;
     }else{
         const p = A[0];
-        const parted = partition(A,p); 
+        const len = array_length(A);
+        const rest = slice_array(A,1,len-1);
+        const parted = partition(rest,p); 
         const front = quicksort(head(parted));
+        display(front,"front");
         const back = quicksort(tail(parted));
-        display(front);
+        display(back,"back");
+        append_array(front,p);
         return combine_array(front,back);
     }
    
 }
-quicksort([1,2]);
+display(quicksort([2,1,3,1,2,3,5,7,2]),"Notice how this sorting algorithm does not change the original array. You can use a for loop to replace all values in A if you want to though ---->");
