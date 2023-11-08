@@ -76,6 +76,25 @@ function filter_array(pred, A) {
     }
     return new_array;
 }
+
+
+function flatten_array(array){
+    
+    function helper(array, result){
+        const len = array_length(array);
+        
+        for(let i = 0; i< len; i=i+1){
+            if(is_array(array[i])){
+                helper(array[i], result);
+            }
+            else{
+                append_array(result,array[i]);
+            }
+        }
+        return result;
+    }
+    return helper(array, []);
+}
 //Notice how this is basically the mathematical formula of dot product where you have 3 pointers. 
 // pointer 1 responsible for moving along the rows of A, pointer 2 for moving along the columns and pointer 3 for moving along the col of B. 
 function dot_product(A,B){
