@@ -334,8 +334,10 @@ function merge_sort(A){
         return res;
     }
 
-display(merge_sort([1,3,2,3,4,5,6,2123,2,3,4]),"Notice how this way of implementing is extremely space consuming --> ");
-//less space coonsuming method
+display(merge_sort([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]),"Notice how this way of implementing is extremely space consuming --> ");
+//less space coonsuming method. This method did not actually "split" the array like you would actually do for a list as shown in mergesort algo for lists.
+//However, it takes a range and pretends that it is "splitted", i.e. operation is done only on this range of variables. 
+//This is an advantage of arrays, which is that the sorting is less space consuming. 
 function better_merge_sort(A){
     const len = array_length(A);
     merge_helper(A,0,len-1);
@@ -383,7 +385,57 @@ function better_merge(A,low,mid,high){
     }
    
 }
-display(better_merge_sort([1,3,2,3,4,5,6,2123,2,3,4]),"A better merge_sort. Notice how only 1 more array is created as compared to multiple arrays in the previous method--->");
+display(better_merge_sort([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]),
+"A better merge_sort. Notice how only 1 more array is created as compared to multiple arrays in the previous method--->");
 
-/*******Destructive Merge_sort*******************/
+/*******Destructive Merge_sort for list adapted to arrays*******************/
 
+function d_split_list(xs) {
+    const result= pair(xs,null);
+    const len = length(xs);
+    function helper(ys){
+        let tailing = ys;
+        for(let i = 0; i<len/2-1;i=i+1){
+            tailing = tail(tailing);
+        }
+        return tailing;
+    }
+    set_tail(result,tail(helper(xs)));
+    //tail(list(3,4,5,6)) === list(4,5,6)? 
+
+    set_tail(helper(xs), null);
+    return result;
+
+}
+function d_merge(xs, ys) {
+    if(is_null(xs)){
+        return ys;
+    }else if(is_null(ys)){
+        return xs;
+    }
+    
+    if(head(xs)>head(ys)){
+        set_tail(ys,d_merge(xs,tail(ys)));
+        return ys;
+    }else{
+        set_tail(xs,d_merge(tail(xs),ys));
+        return xs;
+        }
+
+}
+
+
+function d_merge_sort(xs){
+    if(is_null(xs) || is_null(tail(xs))){
+        return xs;
+    }
+    let split = d_split_list(xs);
+    let head_list = head(split);
+    let tail_list = tail(split);
+    return d_merge(d_merge_sort(head_list),d_merge_sort(tail_list));
+    
+}
+
+// TEST:
+const my_list = list(7, 2, 4, 6, 9, 1, 5, 8, 3, 6);
+d_merge_sort(my_list);
