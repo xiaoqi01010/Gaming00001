@@ -608,6 +608,5 @@ function quicksort(A){
         append_array(front,p);
         return combine_array(front,back);
     }
-   
 }
 display(quicksort([2,1,3,1,2,3,5,7,2]),"Notice how this sorting algorithm does not change the original array. You can use a for loop to replace all values in A if you want to though ---->");
