@@ -31,6 +31,16 @@ function in_array(array,element){
     return true_or_false;
 }
 
+function slice_array(A, i, j) {
+    const new_A = [];
+
+    for (let x = i; x <= j; x = x + 1) {
+        new_A[x - i] = A[x];
+    }
+
+    return new_A;
+}
+
 //Notice how this is basically the mathematical formula of dot product where you have 3 pointers. 
 // pointer 1 responsible for moving along the rows of A, pointer 2 for moving along the columns and pointer 3 for moving along the col of B. 
 function dot_product(A,B){
