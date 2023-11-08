@@ -41,6 +41,15 @@ function slice_array(A, i, j) {
     return new_A;
 }
 
+function copy_array(A) {
+    const len = array_length(A);
+    const B = [];
+    for (let i = 0; i < len; i = i + 1) {
+        B[i] = A[i];
+    }
+    return B;
+}
+
 //Notice how this is basically the mathematical formula of dot product where you have 3 pointers. 
 // pointer 1 responsible for moving along the rows of A, pointer 2 for moving along the columns and pointer 3 for moving along the col of B. 
 function dot_product(A,B){
