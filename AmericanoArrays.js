@@ -568,3 +568,33 @@ function d_merge_sort_array(A){
 
 display(d_merge_sort_array([7, 2, 4, 6, 9, 1, 5, 8, 3, 6]),"Notice how one data type can be easily converted to another so that maniplationc can occur.Overhere, it was obvious that the code is much shorter if you can use list instead of array --->");
 
+/*****************************Quicksort algorithm***********************************/
+function partition(A,p){
+    const a = [];
+    const b = [];
+    for(let i = 0; i<array_length(A);i = i+1){
+        const x = A[i];
+        if(x<p){
+            append_array(a,x);
+        }else{
+            append_array(b,x);
+        }
+        append_array(a,p);
+    }
+    return pair(a,b);
+}
+
+function quicksort(A){
+    if(array_length(A)<2){
+        return A;
+    }else{
+        const p = A[0];
+        const parted = partition(A,p); 
+        const front = quicksort(head(parted));
+        const back = quicksort(tail(parted));
+        display(front);
+        return combine_array(front,back);
+    }
+   
+}
+quicksort([1,2]);
