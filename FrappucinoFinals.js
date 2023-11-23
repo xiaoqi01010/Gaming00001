@@ -94,7 +94,12 @@ set_head(hh2,tmp);
 set_tail(tmp, hh2);
 set_tail(hh2, hh2);
 
-const tmp2 = 
+const tmp2 = pair(undefined,undefined);
+set_head(tmp2,hh3);
+set_head(hh3,tmp2);
+set_tail(tmp2,hh3);
+set_tail(hh3,tmp2);
 
 draw_data(hh1);
 draw_data(hh2);
+draw_data(hh3);
