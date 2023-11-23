@@ -226,13 +226,13 @@ function eq(x,y,res){
 }
 return is_null(y)
     ? false
-    : eq(x,head(y)) && belongs(x,tail(y))
+    : eq(x,head(y),true) || belongs(x,tail(y))
     ;
 }
 function remove_dup(xs){
-    return accumulate((x,y)=>belongs(x,y)
-        ? pair(x,y)
-        : y
+    return accumulate((x,y)=>belongs(display(x),display(y))
+        ? y
+        : pair(x,y)
         ,null,xs);
     }
     return remove_dup(xs);
