@@ -103,3 +103,23 @@ set_tail(hh3,tmp2);
 draw_data(hh1);
 draw_data(hh2);
 draw_data(hh3);
+
+function is_hula_hoop(x){
+    let pairs = null;
+    function check(y){
+        if(is_pair(y)){
+            if(!is_null(member(y,pairs))){
+                return true;
+            }else{
+                pairs = pair(y,pairs);
+                return check(head(y)) && check(tail(y));
+                }
+            }else{
+                return false;
+            }
+    }
+    return check(x);
+}
+
+const test = list(1,2,3);
+is_hula_hoop(test);
