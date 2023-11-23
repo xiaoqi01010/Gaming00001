@@ -137,11 +137,11 @@ function scream_ref(s,n){
 
 scream_ref(fibonacci,10);
 ///Over here there is no way of referencing to itself since the tail is a nullary function that deos not take in any paramter 
-//const stream = pair(1,()=>pair(2,()=>pair(head(stream)+head(tail(stream)()),()=>tail(stream)())));
+const stream = pair(1,()=>pair(2,()=>pair(head(stream)+head(tail(stream)()),()=>tail(stream)())));
 
 function show_stream(stream,n){
     return n===0
         ? null
         : pair(head(stream),show_stream(tail(stream)(),n-1));
 }
-
+show_stream(stream,10);
