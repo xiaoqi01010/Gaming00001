@@ -81,3 +81,8 @@ function partially_hoopify(xs,m){
     return c;
 }
 draw_data(partially_hoopify(list(1,2,3,4,5),2));
+
+const hh1 = pair(undefined,undefined);
+const hh2 = pair(undefined,undefined);
+const hh3 = pair(undefined,undefined);
+
