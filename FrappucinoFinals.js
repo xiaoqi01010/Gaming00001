@@ -23,3 +23,24 @@ function accumulate_iterate(f,init,xs){
 
 accumulate_iterate((x,y)=>x/y,2, list(24,16,8));
 
+function map(f,xs){
+    return is_null(xs)? null: pair(f(head(xs)),map(f,tail(xs)));
+}
+
+function copy(xs){
+    return map(x=>x,xs);
+}
+
+function last_pair(xs){
+    return is_null(tail(xs))
+        ? xs
+        : last_pair(tail(xs))
+        ;
+}
+
+function hoopify(xs){
+    return hoopify(set_tail(last_pair(xs),copy(xs)));
+}
+
+const A = pair(undefined, undefined);
+hoopify(A);
