@@ -167,3 +167,36 @@ function tree_to_arraytree(xs){
 }
 
 tree_to_arraytree(list(list(1,2,3),list(3,2,list(2,3,4))));
+//model answer is even more is even more simple
+function tree2arr(xs){
+    if(is_number(xs)){
+        return xs;//since array is implemented using array
+    }else{
+        const a = [];
+        let i = 0;
+        while(!is_null(xs)){
+            a[i] = tree2arr(head(xs));
+            i = i+1;
+            xs = tail(xs);
+        }
+        return a;
+    }
+}
+
+tree2arr(list(list(1,2,3),list(3,2,list(2,3,4))));
+
+function arraytree_to_tree(a){
+    let pointer = 0;
+    while(!equal(a[pointer],undefined)){
+        if(is_number(a)){
+            return a;
+        }else{
+            let xs = null;
+            const len = array_length(a);
+            for(let i = len -1; i>=0; i = i -1){
+                xs = pair(arraytree_to_tree(a[i]),xs);
+            }
+            return xs;
+        }
+    }
+}
