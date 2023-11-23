@@ -243,7 +243,7 @@ perms01(4,1);
 //Study the model solution below: 
 function perms02(n,m){
     if(n===0 && m === 0){
-        return list(null);
+        return list(null); // Note that you are supposed to return a lits of something so the base case should be a list of null.
     }else{
         const p0 = (n>0)
             ? map(p=>pair(0,p),perms02(n-1,m))
@@ -255,3 +255,5 @@ function perms02(n,m){
     }
 }
 perms02(1,2);
+
+function 
