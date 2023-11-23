@@ -37,10 +37,29 @@ function last_pair(xs){
         : last_pair(tail(xs))
         ;
 }
-
+//Hoop streams 
 function hoopify(xs){
-    return hoopify(set_tail(last_pair(xs),copy(xs)));
+    set_tail(display(last_pair(xs)),copy(xs));
+    const res = copy(xs);
+    set_head(xs,res);
+    set_tail(xs,()=>hoopify(res));
+    return xs;
 }
 
-const A = pair(undefined, undefined);
-hoopify(A);
+const A = list(1,2,3,4,5);
+const B = hoopify(A);
+
+function hoop_ref(hoop,n){
+    return n===0
+        ? hoop
+        : hoop_ref(display(tail(hoop)()),n-1)
+        ;
+}
+hoop_ref(B,2);
+
+// Hoopify answers
+function hoopify(xs){
+    const c = copy(xs);
+    const lp = last_pair(c);
+    set_tail(c,lp);
+}
