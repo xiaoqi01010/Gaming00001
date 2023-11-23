@@ -123,3 +123,16 @@ function is_hula_hoop(x){
 
 const test = list(1,2,3);
 is_hula_hoop(test);
+
+const fibonacci = pair(0,(s1,ignore)=> pair(1,(s2,ignore)=> pair(head(s1)+head(s2),(s3,ignore)=>tail(display(tail(display(s1,"s1"))(s2,0),"s2"))(s3,0))));
+
+function scream_ref(s,n){
+    function helper(s,i,k){
+        return k === 0
+            ? head(s)
+            : helper(tail(s)(s,i+1),i+1,k-1);
+    }
+    return helper(s,0,n);
+}
+
+scream_ref(fibonacci,3);
