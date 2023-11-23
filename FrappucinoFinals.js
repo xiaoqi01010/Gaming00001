@@ -256,4 +256,45 @@ function perms02(n,m){
 }
 perms02(1,2);
 
-function 
+function two_d_memoize(f){
+    const mem = [];
+    function read(x,y){
+        return mem[x] === undefined 
+            ? undefined
+            : mem[x][y]
+            ;
+    }
+    function write(x,y,value){
+        if(mem[x] === undefined){
+            mem[x] = [];
+        }else{}
+        mem[x][y] = value;
+    }
+    function mf(x,y){
+        const mem_xy = read(x,y);
+        if(mem_xy!==undefined){
+            return mem_xy;
+        }else{
+        const result = f(x,y);
+        write(x,y,result);
+        return result;
+        }
+    }
+}
+
+const perms01memo = 
+two_d_memoize((n,m)=> {
+    if(n===0 && m === 0){
+        return list(null); 
+    }else{
+        const p0 = (n>0)
+            ? map(p=>pair(0,p),perms02(n-1,m))
+            : null;
+        const p1 = (m>0)
+            ? map(p=>pair(1,p),perms02(n,m-1))
+            : null;
+        return append(p0,p1);
+        }
+    }
+);
+display(perms01memo);
