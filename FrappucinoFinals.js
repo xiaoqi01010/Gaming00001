@@ -136,3 +136,12 @@ function scream_ref(s,n){
 }
 
 scream_ref(fibonacci,3);
+
+const stream = pair(1,()=>pair(2,()=>pair(head(stream)+head(tail(stream)()),()=>tail(stream)())));
+
+function show_stream(stream,n){
+    return n===0
+        ? null
+        : pair(head(stream),show_stream(tail(stream)(),n-1));
+}
+show_stream(stream,25);
