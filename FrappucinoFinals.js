@@ -124,7 +124,7 @@ function is_hula_hoop(x){
 const test = list(1,2,3);
 is_hula_hoop(test);
 
-const fibonacci = pair(0,(s1,ignore)=> pair(1,(s2,ignore)=> pair(head(s1)+head(s2),(s3,ignore)=>tail(display(tail(display(s1,"s1"))(s2,0),"s2"))(s3,0))));
+const fibonacci = pair(0,(s1,ignore)=> pair(1,(s2,ignore)=> pair(head(s1)+head(s2),(s3,ignore)=>tail(display(tail(display(s1,"s1"))(s2,0),"s2"))(display(s3,"s3"),0))));
 
 function scream_ref(s,n){
     function helper(s,i,k){
@@ -135,13 +135,13 @@ function scream_ref(s,n){
     return helper(s,0,n);
 }
 
-scream_ref(fibonacci,3);
-
-const stream = pair(1,()=>pair(2,()=>pair(head(stream)+head(tail(stream)()),()=>tail(stream)())));
+scream_ref(fibonacci,10);
+///Over here there is no way of referencing to itself since the tail is a nullary function that deos not take in any paramter 
+//const stream = pair(1,()=>pair(2,()=>pair(head(stream)+head(tail(stream)()),()=>tail(stream)())));
 
 function show_stream(stream,n){
     return n===0
         ? null
         : pair(head(stream),show_stream(tail(stream)(),n-1));
 }
-show_stream(stream,25);
+
