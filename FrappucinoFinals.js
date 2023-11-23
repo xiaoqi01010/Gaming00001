@@ -22,3 +22,4 @@ function accumulate_iterate(f,init,xs){
 }
 
 accumulate_iterate((x,y)=>x/y,2, list(24,16,8));
+
