@@ -186,8 +186,6 @@ function tree2arr(xs){
 tree2arr(list(list(1,2,3),list(3,2,list(2,3,4))));
 
 function arraytree_to_tree(a){
-    let pointer = 0;
-    while(!equal(a[pointer],undefined)){
         if(is_number(a)){
             return a;
         }else{
@@ -199,5 +197,13 @@ function arraytree_to_tree(a){
             return xs;
         }
     }
-}
 
+display(arraytree_to_tree([1,[2,3,1],[1,[2,3]]]),"Notice how wishful thinking is applied on the array.Instead of looping through layer by layer in the array, we assume that the function will take care of the recursion for each element by applying recursion on each of them and providing a needed base case of only numbers being present --->");
+
+function array_permutations(a){
+    function arr(as){
+        let pointer = 0;
+        let res = null;
+        while(!equal(as[pointer]))
+    }
+}
