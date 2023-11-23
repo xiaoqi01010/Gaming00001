@@ -237,7 +237,7 @@ function remove_dup(xs){
     }
     return remove_dup(xs);
 }
-perms01(4,1);
+display(perms01(4,1),"inefficient method -->");
 
 //But do notice how the method above is extremely inefficient space wise and time wise since it compares everysingle element against accumulated data.
 //Study the model solution below: 
@@ -254,10 +254,10 @@ function perms02(n,m){
         return append(p0,p1);
     }
 }
-perms02(1,2);
+display(perms02(1,2),"more efficient method -->");
 
 function two_d_memoize(f){
-    const mem = [];
+    let mem = [];
     function read(x,y){
         return mem[x] === undefined 
             ? undefined
@@ -280,10 +280,9 @@ function two_d_memoize(f){
         return result;
         }
     }
+    return mf;
 }
-
-const perms01memo = 
-two_d_memoize((n,m)=> {
+const a = (n,m)=>{
     if(n===0 && m === 0){
         return list(null); 
     }else{
@@ -295,6 +294,12 @@ two_d_memoize((n,m)=> {
             : null;
         return append(p0,p1);
         }
-    }
-);
+    };
+
+
+const perms01memo = two_d_memoize(a);
+perms01memo(2,2);
+
+
+
 
