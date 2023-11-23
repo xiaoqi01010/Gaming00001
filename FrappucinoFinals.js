@@ -89,8 +89,12 @@ const hh3 = pair(undefined,undefined);
 set_head(hh1,hh1);
 set_tail(hh1,hh1);
 const tmp = pair(undefined, undefined);
-set_head(tmp,tmp1);
-set_tail(tmp, tmp1);
-set_tail()
+set_head(tmp,tmp);
+set_head(hh2,tmp);
+set_tail(tmp, hh2);
+set_tail(hh2, hh2);
+
+const tmp2 = 
 
 draw_data(hh1);
+draw_data(hh2);
