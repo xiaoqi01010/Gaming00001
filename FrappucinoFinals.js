@@ -58,8 +58,26 @@ function hoop_ref(hoop,n){
 hoop_ref(B,2);
 
 // Hoopify answers
-function hoopify(xs){
+function hoopif(xs){
     const c = copy(xs);
     const lp = last_pair(c);
-    set_tail(c,lp);
+    set_tail(lp,c);
+    return c;
 }
+//returns a circualr list. Note that the previous answer is not a circular list but rather a stream which is not what the question wants. 
+hoopif(list(1,2,3,4,5));
+
+//Once again, for a recursive structure to be created for which you cant destruct the original data,what you can do is to
+// 1. create a copy 2. create the cycle atthe right position in the copy 3. return the copied structure. 
+function partially_hoopify(xs,m){
+    function list_pairs(xs,m){
+        return m === 0
+            ? xs
+            : list_pairs(tail(xs),m-1);
+    }
+    const c = copy(xs);
+    const lp = last_pair(c);
+    set_tail(lp,list_pairs(c,m));
+    return c;
+}
+draw_data(partially_hoopify(list(1,2,3,4,5),2));
