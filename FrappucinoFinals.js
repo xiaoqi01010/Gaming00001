@@ -238,3 +238,20 @@ function remove_dup(xs){
     return remove_dup(xs);
 }
 perms01(4,1);
+
+//But do notice how the method above is extremely inefficient space wise and time wise since it compares everysingle element against accumulated data.
+//Study the model solution below: 
+function perms02(n,m){
+    if(n===0 && m === 0){
+        return list(null);
+    }else{
+        const p0 = (n>0)
+            ? map(p=>pair(0,p),perms02(n-1,m))
+            : null;
+        const p1 = (m>0)
+            ? map(p=>pair(1,p),perms02(n,m-1))
+            : null;
+        return append(p0,p1);
+    }
+}
+perms02(1,2);
