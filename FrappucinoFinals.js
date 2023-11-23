@@ -200,10 +200,41 @@ function arraytree_to_tree(a){
 
 display(arraytree_to_tree([1,[2,3,1],[1,[2,3]]]),"Notice how wishful thinking is applied on the array.Instead of looping through layer by layer in the array, we assume that the function will take care of the recursion for each element by applying recursion on each of them and providing a needed base case of only numbers being present --->");
 
-function array_permutations(a){
-    function arr(as){
-        let pointer = 0;
-        let res = null;
-        while(!equal(as[pointer]))
-    }
+function permutations(xs){
+    return is_null(xs)
+        ? list(null)
+        : accumulate(append,null,map(x=>map(p=>pair(x,p),permutations(remove(x,xs))),xs));
 }
+function perms01(n,m){
+    function helper(n,m,res){
+        return n !== 0 && m !==0
+            ? helper(n-1,m-1,pair(1,pair(0,res)))
+            : n===0 && m!==0
+            ? helper(n,m-1,pair(0,res))
+            : n!==0 && m===0
+            ? helper(n-1,m,pair(1,res))
+            :res
+            ;
+    }
+    const ys = helper(n,m,null);
+    const xs = permutations(ys);
+function belongs(x,y){
+function eq(x,y,res){
+    return !is_null(x)
+        ? eq(tail(x),tail(y),equal(head(x),head(y)) && res)
+        : res;
+}
+return is_null(y)
+    ? false
+    : eq(x,head(y)) && belongs(x,tail(y))
+    ;
+}
+function remove_dup(xs){
+    return accumulate((x,y)=>belongs(x,y)
+        ? pair(x,y)
+        : y
+        ,null,xs);
+    }
+    return remove_dup(xs);
+}
+perms01(4,1);
