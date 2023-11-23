@@ -297,4 +297,4 @@ two_d_memoize((n,m)=> {
         }
     }
 );
-display(perms01memo);
+
