@@ -145,3 +145,25 @@ function show_stream(stream,n){
         : pair(head(stream),show_stream(tail(stream)(),n-1));
 }
 show_stream(stream,10);
+
+function tree_to_arraytree(xs){
+    let res = [];
+    function tree_to_arraytree_helper(xs){
+    if(is_null(xs)){
+        return res;
+    }else{
+        if(is_list(head(xs))){
+            const len = array_length(res);
+            res[len] = tree_to_arraytree(head(xs));
+        }else if(is_number(head(xs))){
+            const len = array_length(res);
+            res[len] = head(xs);
+            }
+        }
+    return tree_to_arraytree_helper(tail(xs));
+    }
+    
+    return tree_to_arraytree_helper(xs);
+}
+
+tree_to_arraytree(list(list(1,2,3),list(3,2,list(2,3,4))));
