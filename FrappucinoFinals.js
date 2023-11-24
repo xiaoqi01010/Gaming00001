@@ -301,7 +301,61 @@ const perms01memo = two_d_memoize(a);
 perms01memo(2,2);
 
 //BOX AND POINTER DIAGRAM: DO NOTE THAT THESE ARE FREE MARKS AND THAT YOU ARE A DUMBASS IF YOU DUN GET THEM:
+//Data abstraction 
+function make_stack(){
+    return list(null);
+}
 
 
+function is_empty(stack){
+    return is_null(head(stack))&& is_null(tail(stack));
+}
 
 
+function push(stack,x){
+    let tmp = copy(stack);
+    set_head((stack),x);
+    display(stack);
+    set_tail((stack),tmp);
+}
+
+//I couldnt quite figure this out so I cant really check the question on stack.
+/*
+function pop(stack){
+    let temp = null;
+    while(!is_empty(stack)){
+    if(is_null(tail(stack))){
+        temp = head(stack);
+        set_head(stack,null);
+
+    }else{
+        temp = head(tail(stack));
+        pop(tail(stack));
+        set_head(stack,temp);
+        }
+    }
+    return temp;
+}*/
+
+function stack_list(xs){
+    return reverse(xs);
+}
+
+const AA = stack_list(list(1,2,3,4));
+AA;
+pop(AA);
+push(AA,1);
+AA;
+
+function insert_to_bottom(stack,new_elem){
+    if(is_empty(stack)){
+        push(stack,new_elem);
+    }else{
+        const elem = pop(stack);
+        insert_to_bottom(stack,new_elem);
+        push(stack,elem);
+    }
+}
+
+insert_to_bottom(AA,6);
+AA;
