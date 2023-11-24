@@ -300,6 +300,8 @@ const a = (n,m)=>{
 const perms01memo = two_d_memoize(a);
 perms01memo(2,2);
 
+//BOX AND POINTER DIAGRAM: DO NOTE THAT THESE ARE FREE MARKS AND THAT YOU ARE A DUMBASS IF YOU DUN GET THEM:
+
 
 
 
