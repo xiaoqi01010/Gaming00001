@@ -359,3 +359,12 @@ function insert_to_bottom(stack,new_elem){
 
 insert_to_bottom(AA,6);
 AA;
+
+function reverse_stack(stack){
+    if(!is_empty(stack)){
+        const elem = pop(stack);
+        reverse_stack(stack);
+        insert_to_bottom(stack,elem);
+    }else{}
+}
+
