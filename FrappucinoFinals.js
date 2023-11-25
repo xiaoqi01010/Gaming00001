@@ -302,6 +302,7 @@ const perms01memo = two_d_memoize(a);
 perms01memo(2,2);
 
 //BOX AND POINTER DIAGRAM: DO NOTE THAT THESE ARE FREE MARKS AND THAT YOU ARE A DUMBASS IF YOU DUN GET THEM:
+
 /********************BUGGY WARNING!!!!***************************************************************************************/
 //Data abstraction 
 function make_stack(){
@@ -474,7 +475,7 @@ function play_tic_tac_toe(){
     return 0;
 }
 
-play_tic_tac_toe();
+//play_tic_tac_toe();
 //2022/23 paper
 function insert_last(xs,x){
     const tmp = pair(x,tail(xs));
@@ -547,3 +548,11 @@ function RCL_to_stream(C){
 const streamA = RCL_to_stream(res);
 eval_stream(streamA,20);
 
+//2021/22 paper
+function untilzero(x){
+    return x === 0 ? "hello": untilzero;
+}
+
+function sumsum(x){
+    return x===0 ? 0: (y)=> x + sumsum(y);
+}
