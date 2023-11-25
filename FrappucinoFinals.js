@@ -431,10 +431,10 @@ const res = draw_data(append_RCLS(CD,EF));
 //Model solution given below for remove_last
 function remove_last(xs){
     let second_last = xs;
-    while(!equal(xs,tail(second_last))){
+    while(xs!==tail(second_last)){
         second_last = tail(second_last);
     }
     set_tail(second_last,tail(xs));
     return second_last;
 }
-remove_last(res);
+draw_data(remove_last(res));
