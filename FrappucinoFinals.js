@@ -3,7 +3,7 @@ function accumulate_iter(f, init, xs){
     function iter_helper(f,init,xs_new){
         return is_null(xs_new)
             ? init
-            : iter_helper(f,display(f(display(head(xs_new),"head"),init)),tail(xs_new));
+            : iter_helper(f,display(f((head(xs_new),"head"),init)),tail(xs_new));
     }
     return iter_helper(f,init,reverse(xs));
 }
@@ -122,7 +122,27 @@ function is_hula_hoop(x){
 }
 
 const test = list(1,2,3);
-is_hula_hoop(test);
+display(is_hula_hoop(hh1),"hula hoop checker v1 -->");
+
+function is_hula_hoop_v2(x){
+    let mem = null;
+    function check(y){
+        if(y === mem){
+            return true;
+        }else{
+            return false;
+        }
+        return check(head(y))|| check(tail(y));
+    }
+    if(is_pair(x)){
+        mem = x;
+        return check(head(x)) || check(tail(x));
+    }else{
+        return false;
+    }
+}
+
+display(is_hula_hoop_v2(hh1),"hula hoop check v2 -->");
 
 const fibonacci = pair(0,(s1,ignore)=> pair(1,(s2,ignore)=> pair(head(s1)+head(s2),(s3,ignore)=>tail(tail(s1)(s2,0))(s3,0))));
 
