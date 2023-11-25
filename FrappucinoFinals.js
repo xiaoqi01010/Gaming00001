@@ -137,7 +137,7 @@ function is_hula_hoop(x){
 }
 
 const test = list(1,2,3);
-display(is_hula_hoop(hh1),"hula hoop checker v1 -->");
+display(is_hula_hoop(2),"hula hoop checker v1 -->");
 
 function is_hula_hoop_v2(x){
     let mem = null;
@@ -147,17 +147,17 @@ function is_hula_hoop_v2(x){
         }else{
             return false;
         }
-        return check(head(y))|| check(tail(y));
+        return check(head(y)) && check(tail(y));
     }
     if(is_pair(x)){
         mem = x;
-        return check(head(x)) || check(tail(x));
+        return check(head(x)) && check(tail(x));
     }else{
         return false;
     }
 }
 
-display(is_hula_hoop_v2(hh1),"hula hoop check v2 -->");
+display(is_hula_hoop_v2(2),"hula hoop check v2 -->");
 
 const fibonacci = pair(0,(s1,ignore)=> pair(1,(s2,ignore)=> pair(head(s1)+head(s2),(s3,ignore)=>tail(tail(s1)(s2,0))(s3,0))));
 
