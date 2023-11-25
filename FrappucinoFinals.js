@@ -427,6 +427,32 @@ function check_winner(g,p){
         );
 }
 
+function play_tic_tac_toe(){
+    const grid = [["_","_","_"],
+                ["_","_","_"],
+                ["_","_","_"]];
+    while(prompt("Do you want to play tic tac toe?")==="yes"){
+        free_grid(grid);
+        let current_player ="X";
+        while(current_player!=="GAME OVER"){
+            const r = parse_int(prompt(grid_to_string(grid)+ "\n Player" + current_player + ": enter row (0 - 2):"),10);
+            const c = parse_int(prompt(grid_to_string(grid)+ "\n Player" + current_player + ": enter col (0 - 2):"),10);
+            if(replace_string(current_player,r,c,grid,"_")){
+                if(check_winner(grid,current_player)){
+                    prompt(grid_to_string(grid) + "\nPlayer" + current_player + "wins!");
+                    current_player = "GAMEOVER";
+                } else {
+                    current_player === "X"? "X": "O";
+                }
+            }else{
+                prompt(grid_to_string(grid")"+r+c+") is not" + "an empty slot! Try again!");
+            }
+        }
+    }
+    prompt("Hope you had a nice time playing tic tac toe!");
+}
+
+play_tic_tac_toe();
 //2022/23 paper
 function insert_last(xs,x){
     const tmp = pair(x,tail(xs));
