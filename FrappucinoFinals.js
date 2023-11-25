@@ -377,12 +377,29 @@ function reverse_stack(stack){
 
 
 //2022/23 paper
-function inset_last(xs,x){
-    const tmp = list(x);
-    set_tail(tmp,xs);
+function insert_last(xs,x){
+    const tmp = pair(x,tail(xs));
     set_tail(xs,tmp);
+    return tmp;
 }
+//Note that the implementation below is wrong because you need a new list for the operations to occurs correctly. 
+function make_RCL_wrong(L){
+    if(is_null(tail(L))){
+        set_tail(L,L);
+    }else{
+        insert_last(draw_data(make_RCL(tail(L))),head(L));
+    }
+    return L;
+}
+
 const ys = list(1,2,3);
 set_tail(tail(tail(ys)),ys);
-ys;
+insert_last(ys,4);
+insert_last(ys,5);
+const xs = list(3);
+set_tail(xs,xs);
+insert_last(xs,5);
+draw_data(xs);
+draw_data(ys);
+
 
