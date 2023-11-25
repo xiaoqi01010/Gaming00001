@@ -552,7 +552,11 @@ eval_stream(streamA,20);
 function untilzero(x){
     return x === 0 ? "hello": untilzero;
 }
-
+//over here a function helper is needed no choice. 
 function sumsum(x){
-    return x===0 ? 0: (y)=> x + sumsum(y);
+    function helper(x,y){
+        return x===0? y: (z)=>helper(z,x+y);
+    }
+    return helper(x,0);
 }
+display(sumsum(1)(10)(0),"Notice how you cant simply return sumsum +x since LHS is function ---->");
