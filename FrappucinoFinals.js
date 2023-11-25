@@ -438,3 +438,12 @@ function remove_last(xs){
     return second_last;
 }
 draw_data(remove_last(res));
+//Terminating condition is when your tail is equal to original list 
+function RCL_to_stream(C){
+    function helper(xs){
+        return pair(head(xs),()=> tail(xs)===C? null:helper(tail(xs)));
+    }
+    return helper(C);
+}
+const streamA = RCL_to_stream(res);
+eval_stream(streamA,20);
