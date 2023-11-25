@@ -406,7 +406,7 @@ function free_grid(grid){
     }
 }
 
-function replace(new_string, r,c, g, expected_string){
+function replace_string(new_string, r,c, g, expected_string){
     if(g[r][c] === expected_string){
         g[r][c] = new_string;
         return true;
@@ -423,10 +423,31 @@ function check_winner(g,p){
         (g[0][2] === p && g[1][2]===p && g[2][2]===p)||
         (g[0][0] === p && g[0][1]===p && g[0][2]===p)||
         (g[1][0] === p && g[1][1]===p && g[1][2]===p)||
-        (g[2][0] === p && g[2][1]===p && g[2][2]===p)||
+        (g[2][0] === p && g[2][1]===p && g[2][2]===p)
         );
 }
 
+function number_to_string(n){
+    return n === 0
+        ? "0"
+        ：n === 1
+        ? "1"
+        ：n === 2
+        ? "2"
+        ：n === 3
+        ? "3"
+        ：n === 4
+        ? "4"
+        ：n === 5
+        ? "5"
+        ：n === 6
+        ? "6"
+        ：n === 7
+        ? "7"
+        ：n === 8
+        ?"8"
+        ："9";
+}
 function play_tic_tac_toe(){
     const grid = [["_","_","_"],
                 ["_","_","_"],
@@ -442,10 +463,10 @@ function play_tic_tac_toe(){
                     prompt(grid_to_string(grid) + "\nPlayer" + current_player + "wins!");
                     current_player = "GAMEOVER";
                 } else {
-                    current_player === "X"? "X": "O";
+                    current_player === "X"? "O": "X";
                 }
             }else{
-                prompt(grid_to_string(grid")"+r+c+") is not" + "an empty slot! Try again!");
+                prompt(grid_to_string(grid) + r + c +") is not" + "an empty slot! Try again!");
             }
         }
     }
