@@ -427,4 +427,6 @@ function append_RCLS(C1,C2){
     helper(reverse(C1));
     return initial_list;
 }
-draw_data(append_RCLS(CD,EF));
+const res = draw_data(append_RCLS(CD,EF));
+
+function 
