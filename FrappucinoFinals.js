@@ -297,22 +297,27 @@ const a = (n,m)=>{
     };
 
 
+
 const perms01memo = two_d_memoize(a);
 perms01memo(2,2);
 
 //BOX AND POINTER DIAGRAM: DO NOTE THAT THESE ARE FREE MARKS AND THAT YOU ARE A DUMBASS IF YOU DUN GET THEM:
+/********************BUGGY WARNING!!!!***************************************************************************************/
 //Data abstraction 
 function make_stack(){
-    return list(null);
+    return null;
 }
 
 
 function is_empty(stack){
-    return is_null(head(stack))&& is_null(tail(stack));
+    return is_null(stack);
 }
 
 
 function push(stack,x){
+    if(is_null(stack)){
+        return list(x);
+    }
     let tmp = copy(stack);
     set_head((stack),x);
     display(stack);
@@ -343,7 +348,7 @@ function stack_list(xs){
 
 const AA = stack_list(list(1,2,3,4));
 AA;
-pop(AA);
+
 push(AA,1);
 AA;
 
@@ -351,7 +356,8 @@ function insert_to_bottom(stack,new_elem){
     if(is_empty(stack)){
         push(stack,new_elem);
     }else{
-        const elem = pop(stack);
+        const elem = head(stack);
+        stack = tail(stack);//these two lines supposed to be pop which removes directly an element from stack
         insert_to_bottom(stack,new_elem);
         push(stack,elem);
     }
@@ -362,9 +368,21 @@ AA;
 
 function reverse_stack(stack){
     if(!is_empty(stack)){
-        const elem = pop(stack);
+        const elem = head(stack);
+        stack = tail(stack);
         reverse_stack(stack);
         insert_to_bottom(stack,elem);
     }else{}
 }
+
+
+//2022/23 paper
+function inset_last(xs,x){
+    const tmp = list(x);
+    set_tail(tmp,xs);
+    set_tail(xs,tmp);
+}
+const ys = list(1,2,3);
+set_tail(tail(tail(ys)),ys);
+ys;
 
