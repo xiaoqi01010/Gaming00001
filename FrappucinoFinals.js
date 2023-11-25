@@ -430,23 +430,23 @@ function check_winner(g,p){
 function number_to_string(n){
     return n === 0
         ? "0"
-        ：n === 1
+        :n === 1
         ? "1"
-        ：n === 2
+        :n === 2
         ? "2"
-        ：n === 3
+        :n === 3
         ? "3"
-        ：n === 4
+        :n === 4
         ? "4"
-        ：n === 5
+        :n === 5
         ? "5"
-        ：n === 6
+        :n === 6
         ? "6"
-        ：n === 7
+        :n === 7
         ? "7"
-        ：n === 8
+        :n === 8
         ?"8"
-        ："9";
+        :"9";
 }
 function play_tic_tac_toe(){
     const grid = [["_","_","_"],
@@ -455,7 +455,7 @@ function play_tic_tac_toe(){
     while(prompt("Do you want to play tic tac toe?")==="yes"){
         free_grid(grid);
         let current_player ="X";
-        while(current_player!=="GAME OVER"){
+        while(current_player!=="GAMEOVER"){
             const r = parse_int(prompt(grid_to_string(grid)+ "\n Player" + current_player + ": enter row (0 - 2):"),10);
             const c = parse_int(prompt(grid_to_string(grid)+ "\n Player" + current_player + ": enter col (0 - 2):"),10);
             if(replace_string(current_player,r,c,grid,"_")){
@@ -463,10 +463,10 @@ function play_tic_tac_toe(){
                     prompt(grid_to_string(grid) + "\nPlayer" + current_player + "wins!");
                     current_player = "GAMEOVER";
                 } else {
-                    current_player === "X"? "O": "X";
+                    current_player = current_player === "X"? "O": "X";
                 }
             }else{
-                prompt(grid_to_string(grid) + r + c +") is not" + "an empty slot! Try again!");
+                prompt("("+ grid_to_string(grid) + number_to_string(r) + number_to_string(c) +") is not" + "an empty slot! Try again!");
             }
         }
     }
