@@ -421,9 +421,10 @@ function append_RCLS(C1,C2){
         while(!is_null(C1)){
             const tmp = head(C1);
             insert_last(initial_list,tmp);
+            return helper(tail(C1));
         }
     }
-    helper(C1);
+    helper(reverse(C1));
     return initial_list;
 }
-append_RCLS(CD,EF);
+draw_data(append_RCLS(CD,EF));
