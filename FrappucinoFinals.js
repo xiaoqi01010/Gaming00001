@@ -417,7 +417,7 @@ function replace_string(new_string, r,c, g, expected_string){
 function check_winner(g,p){
     return(
         (g[0][0] === p && g[1][0]===p && g[2][2]===p)||
-        (g[0][2] === p && g[1][0]===p && g[2][0]===p)||
+        (g[0][2] === p && g[1][1]===p && g[2][0]===p)||
         (g[0][0] === p && g[1][0]===p && g[2][0]===p)||
         (g[0][1] === p && g[1][1]===p && g[2][1]===p)||
         (g[0][2] === p && g[1][2]===p && g[2][2]===p)||
@@ -471,6 +471,7 @@ function play_tic_tac_toe(){
         }
     }
     prompt("Hope you had a nice time playing tic tac toe!");
+    return 0;
 }
 
 play_tic_tac_toe();
