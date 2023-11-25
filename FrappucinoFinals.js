@@ -387,7 +387,7 @@ function make_RCL_wrong(L){
     if(is_null(tail(L))){
         set_tail(L,L);
     }else{
-        insert_last(draw_data(make_RCL(tail(L))),head(L));
+        insert_last(draw_data(make_RCL_wrong(tail(L))),head(L));
     }
     return L;
 }
@@ -401,5 +401,29 @@ set_tail(xs,xs);
 insert_last(xs,5);
 draw_data(xs);
 draw_data(ys);
+//The correct implementation should be as below
+function make_RCLS(L){
+    let C = pair(head(L),null);
+    set_tail(C,C);
+    for(let p = tail(L);!is_null(p);p = tail(p)){
+        C = insert_last(C,head(p));
+    }
+    return C;
+}
 
-
+const AB = enum_list(1,10);
+const CD = enum_list(11,20);
+const EF = enum_list(20,30);
+make_RCLS(AB);
+function append_RCLS(C1,C2){
+    const initial_list = make_RCLS(C2);
+    function helper(C1){
+        while(!is_null(C1)){
+            const tmp = head(C1);
+            insert_last(initial_list,tmp);
+        }
+    }
+    helper(C1);
+    return initial_list;
+}
+append_RCLS(CD,EF);
