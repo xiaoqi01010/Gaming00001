@@ -1,14 +1,14 @@
 //2020/2021 Final assessment sem1
 function accumulate_iter(f, init, xs){
-    function iter_helper(f,init,xs_new){
+    function iter_helper(xs_new){
         return is_null(xs_new)
             ? init
-            : iter_helper(f,display(f((head(xs_new),"head"),init)),tail(xs_new));
+            : f(head(xs_new),iter_helper(tail(xs_new)));
     }
-    return iter_helper(f,init,reverse(xs));
+    return iter_helper(xs);
 }
 
-accumulate_iter((x,y)=>x/y,2, list(24,16,8));
+display(accumulate_iter((x,y)=>x*y+x,2, list(11,2000,24,16,8)),"accumulate iter --->");
 
 //This method uses continuous passing style, which basically forms a long long lambda function. 
 // Over here, you need a helper function to keep operating on the lambda expression. 
@@ -21,8 +21,23 @@ function accumulate_iterate(f,init,xs){
     return acc(xs,x=>x);
 }
 
-accumulate_iterate((x,y)=>x/y,2, list(24,16,8));
+display(accumulate_iterate((x,y)=>x*y+x,2, list(11,2000,24,16,8)),"accumulate iter CPS -->");
 
+//arrays:
+function zip_array(arr1,arr2){
+    let res = [];
+    const len1 = array_length(arr1);
+    if(len1===0){
+        return res;
+    }else{
+        for(let i = 0; i<len1; i = i+1){
+            res[2*i] = arr1[i];
+            res[2*i+1] = arr2[i];
+        }
+        return res;
+    }
+}
+display(zip_array([1,2,3],[4,5,6]),"zip list --->");
 function map(f,xs){
     return is_null(xs)? null: pair(f(head(xs)),map(f,tail(xs)));
 }
