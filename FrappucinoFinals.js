@@ -124,7 +124,7 @@ function is_hula_hoop(x){
 const test = list(1,2,3);
 is_hula_hoop(test);
 
-const fibonacci = pair(0,(s1,ignore)=> pair(1,(s2,ignore)=> pair(head(s1)+head(s2),(s3,ignore)=>tail(display(tail(display(s1,"s1"))(s2,0),"s2"))(display(s3,"s3"),0))));
+const fibonacci = pair(0,(s1,ignore)=> pair(1,(s2,ignore)=> pair(head(s1)+head(s2),(s3,ignore)=>tail(tail(s1)(s2,0))(s3,0))));
 
 function scream_ref(s,n){
     function helper(s,i,k){
@@ -230,7 +230,7 @@ return is_null(y)
     ;
 }
 function remove_dup(xs){
-    return accumulate((x,y)=>belongs(display(x),display(y))
+    return accumulate((x,y)=>belongs(x,y)
         ? y
         : pair(x,y)
         ,null,xs);
@@ -375,6 +375,57 @@ function reverse_stack(stack){
     }else{}
 }
 
+function closest_two_power(x){
+    return math_pow(2,math_floor(math_log2(x)));
+}
+
+function min_tiles(L,W){
+    if(L === 0|| W ===0){
+        return 0;
+    }else if(L===1 && W===1){
+        return 1;
+    }else{
+        const min = (W<L) ? W:L;
+        const power = closest_two_power(min);
+        return 1 + min_tiles(L-power,W) + min_tiles(L,W-power);
+    }
+}
+display(min_tiles(20,5),"Number of tiles required --->");
+
+//TICTAC TOE GAME
+function grid_to_string(grid){
+    return "Current grid:\n" + grid[0][0] + grid[0][1] + grid[0][2] + "\n"
+    + grid[1][0] + grid[1][1] + grid[1][2] + "\n"
+    + grid[2][0] + grid[2][1] + grid[2][2] + "\n";
+}
+function free_grid(grid){
+    for(let r = 0; r<3; r = r+1){
+        for(let c = 0; c<3; c = c+1){
+            grid[r][c] = "_";
+        }
+    }
+}
+
+function replace(new_string, r,c, g, expected_string){
+    if(g[r][c] === expected_string){
+        g[r][c] = new_string;
+        return true;
+    }else{
+        return false;
+    }
+}
+function check_winner(g,p){
+    return(
+        (g[0][0] === p && g[1][0]===p && g[2][2]===p)||
+        (g[0][2] === p && g[1][0]===p && g[2][0]===p)||
+        (g[0][0] === p && g[1][0]===p && g[2][0]===p)||
+        (g[0][1] === p && g[1][1]===p && g[2][1]===p)||
+        (g[0][2] === p && g[1][2]===p && g[2][2]===p)||
+        (g[0][0] === p && g[0][1]===p && g[0][2]===p)||
+        (g[1][0] === p && g[1][1]===p && g[1][2]===p)||
+        (g[2][0] === p && g[2][1]===p && g[2][2]===p)||
+        );
+}
 
 //2022/23 paper
 function insert_last(xs,x){
