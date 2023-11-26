@@ -608,3 +608,20 @@ const xyy = pair(4,yy);
 display(yy);
 xyy;
 
+function make_empty_tree(){
+    return list(null,null);
+}
+
+function is_empty_tree(tree){
+    return equal(list(null,null),tree);
+}
+
+function entry(tree){
+    if(!is_empty_tree){
+        return head(tree);
+    }
+}
+
+function flatten(xs){
+
+}
