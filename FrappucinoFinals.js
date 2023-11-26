@@ -617,7 +617,7 @@ function is_empty_tree(tree){
 }
 
 function entry(tree){
-    if(!is_empty_tree){
+    if(!is_empty_tree(tree)){
         return head(tree);
     }
 }
@@ -630,5 +630,20 @@ function right_branch(tree){
 }
 
 function flatten(xs){
-    
+    return is_empty_tree(left_branch(xs)) && is_empty_tree(right_branch(xs))
+        ? list(entry(xs))
+        : is_empty_tree(right_branch(xs))
+        ? append(flatten(left_branch(xs)),list(entry(xs)))
+        : is_empty_tree(left_branch(xs))
+        ? append(flatten(right_branch(xs)),list(entry(xs)))
+        : append(flatten(right_branch(xs)),append(flatten(left_branch(xs)),list(entry(xs))))
+        ;
 }
+
+const tree_A = list(22,make_empty_tree(),make_empty_tree());
+const tree_B = list(34,make_empty_tree(),make_empty_tree());
+const tree_C = list(20,make_empty_tree(),tree_B);
+const tree_D = list(18,tree_A,make_empty_tree());
+const tree_E = list(16,tree_D,tree_C);
+display(tree_E);
+flatten(tree_E);
