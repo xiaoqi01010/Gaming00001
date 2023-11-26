@@ -201,7 +201,28 @@ function tree_to_arraytree(xs){
     return tree_to_arraytree_helper(xs);
 }
 
-tree_to_arraytree(list(list(1,2,3),list(3,2,list(2,3,4))));
+display(tree_to_arraytree(list(list(1,2,3),list(3,2,list(2,3,4)))),"recursion til number list method -->");
+
+function tree_to_arraytree_v2(xs){
+    let res = [];
+    function helper(xs){
+        if(is_null(xs)){
+            return res;
+        }else if(is_number(xs)){
+            return xs;
+        }if(is_list(xs)){
+            let pointer = array_length(res);
+            for(let p = xs;!is_null(p); p = tail(p)){
+                res[pointer] = tree_to_arraytree_v2(head(p));
+                pointer = pointer +1;
+            }
+            return res;
+        }
+    }
+    return helper(xs);
+}
+display(tree_to_arraytree_v2(list(list(1,2,3),list(3,2,list(2,3,4)))),"recursion till number version. Notice how you have to take care of array pointer because you are not recursing. The best way is still to use recursion-->");
+
 //model answer is even more is even more simple
 function tree2arr(xs){
     if(is_number(xs)){
@@ -317,24 +338,10 @@ function two_d_memoize(f){
     }
     return mf;
 }
-const a = (n,m)=>{
-    if(n===0 && m === 0){
-        return list(null); 
-    }else{
-        const p0 = (n>0)
-            ? map(p=>pair(0,p),perms02(n-1,m))
-            : null;
-        const p1 = (m>0)
-            ? map(p=>pair(1,p),perms02(n,m-1))
-            : null;
-        return append(p0,p1);
-        }
-    };
 
 
-
-const perms01memo = two_d_memoize(a);
-perms01memo(2,2);
+const perms01memo = two_d_memoize(perms01);
+display(perms01memo(2,2),"perms01memo -->");
 
 //BOX AND POINTER DIAGRAM: DO NOTE THAT THESE ARE FREE MARKS AND THAT YOU ARE A DUMBASS IF YOU DUN GET THEM:
 
@@ -595,3 +602,9 @@ function sumsum(x){
     return helper(x,0);
 }
 display(sumsum(1)(10)(0),"Notice how you cant simply return sumsum +x since LHS is function ---->");
+
+const yy = list(1,2,3);
+const xyy = pair(4,yy);
+display(yy);
+xyy;
+
