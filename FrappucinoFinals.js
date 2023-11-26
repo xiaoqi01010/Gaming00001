@@ -621,7 +621,14 @@ function entry(tree){
         return head(tree);
     }
 }
+function left_branch(tree){
+    return head(tail(tree));
+}
+
+function right_branch(tree){
+    return head(tail(tail(tree)));
+}
 
 function flatten(xs){
-
+    
 }
