@@ -647,3 +647,37 @@ const tree_D = list(18,tree_A,make_empty_tree());
 const tree_E = list(16,tree_D,tree_C);
 display(tree_E);
 flatten(tree_E);
+
+function memo(fun) {
+ let already_run = false;
+ let result = undefined;
+ return () => {
+ if (!already_run) {
+ result = fun();
+already_run = true;
+return result;
+ } else {
+ return result;
+ }
+ };
+}
+function add_streams(s1, s2) {
+ return pair(head(s1) + head(s2),
+ () => add_streams(stream_tail(s1),
+ stream_tail(s2)));
+}
+function partial_sums_1(s) {
+ return pair(head(s),
+ () => add_streams(stream_tail(s),
+ partial_sums_1(s)));
+}
+function partial_sums_2(s) {
+ return pair(head(s),
+ memo(() => add_streams(stream_tail(s),
+ partial_sums_2(s))));
+}
+const ones = pair(1, () => ones);
+const integers_1 = partial_sums_1(ones);
+const integers_2 = partial_sums_2(ones);
+
+eval_stream(integers_1,6);
