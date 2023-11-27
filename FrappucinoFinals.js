@@ -682,3 +682,19 @@ const integers_2 = partial_sums_2(ones);
 
 eval_stream(integers_1,6);
 
+const T = list(1,2,3,4,2);
+display(member(2,T),"display -->");
+
+function similar(nt1,nt2){
+    if(is_null(nt1) && is_null(nt2)){
+        return true;
+    }else if(is_number(nt1) && is_number(nt2)){
+        return math_abs(nt1 - nt2)<=1;
+    }else if(is_pair(nt1) && is_pair(nt2)){
+        return similar(head(nt1),head(nt2)) && similar(tail(nt1),tail(nt2));
+    }else{return false;}
+}
+
+const nt1 = list(4,list(5,6));
+const nt2 = list(5,list(5,7));
+similar(nt1,nt2);
