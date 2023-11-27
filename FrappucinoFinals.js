@@ -698,3 +698,4 @@ function similar(nt1,nt2){
 const nt1 = list(4,list(5,6));
 const nt2 = list(5,list(5,7));
 similar(nt1,nt2);
+
